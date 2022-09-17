@@ -15,13 +15,16 @@ import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.ameyaclassicclub.config.ProjectConstants;
 import com.example.ameyaclassicclub.model.member.MemberRegisterationModel;
+import com.example.ameyaclassicclub.utils.ProjectSharedPreference;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.gson.Gson;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -36,12 +39,17 @@ public class MemberRegisterationActivity extends AppCompatActivity {
     private DatabaseReference databaseReference;
     private FirebaseDatabase firebaseDatabase;
     private FirebaseAuth mAuth;
+    private String memberOrStaff;
+
     String firstName, userName, email,mobile,memberDuration, password, co_password;
     String gender = "";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_member_registeration);
+        Intent intent = getIntent();
+        memberOrStaff=intent.getStringExtra(ProjectConstants.MEMBER_OR_STAFF);
         signUp_progress = findViewById(R.id.signUp_progress);
         edit_txt_firstName = findViewById(R.id.firstName);
         edit_txt_userName = findViewById(R.id.userName);
@@ -82,19 +90,24 @@ public class MemberRegisterationActivity extends AppCompatActivity {
                                 @Override
                                 public void onComplete(@NonNull Task<AuthResult> task) {
                                     if (task.isSuccessful()) {
-                                        MemberRegisterationModel data = new MemberRegisterationModel(firstName,userName,mobile,email,memberDuration,gender);
-                                        Map<String, MemberRegisterationModel> users = new HashMap<>();
-                                        users.put(userName,data);
+                                        MemberRegisterationModel data = new MemberRegisterationModel(firstName,userName,mobile,email,memberDuration,gender,memberOrStaff,null);
+//                                        Map<String, MemberRegisterationModel> users = new HashMap<>();
+//                                        users.put(email,data);
                                         FirebaseDatabase.getInstance().getReference("UserData")
-                                                .setValue(users).
+                                                .child(FirebaseAuth.getInstance().getCurrentUser().getUid()).setValue(data).
                                                 addOnCompleteListener(new OnCompleteListener<Void>() {
                                                     @Override
                                                     public void onComplete(@NonNull Task<Void> task) {
                                                         //    progressbar GONE
                                                         signUp_progress.setVisibility(View.GONE);
                                                         Toast.makeText(MemberRegisterationActivity.this, "Successful Registered", Toast.LENGTH_SHORT).show();
+                                                        ProjectSharedPreference.getInstance(MemberRegisterationActivity.this).saveStringPreference(
+                                                                ProjectConstants.EXTRAS_LOGIN_DETAILS,
+                                                                new Gson().toJson(data)
+                                                        );
                                                         Intent intent = new Intent(MemberRegisterationActivity.this, HomeActivity.class);
                                                         startActivity(intent);
+                                                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                                                         finish();
                                                     }
                                                 });
@@ -184,4 +197,5 @@ public class MemberRegisterationActivity extends AppCompatActivity {
             startActivity(intent);
         }
     }
+
 }

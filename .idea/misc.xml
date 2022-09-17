@@ -3,10 +3,18 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/androidProjects/app/src/main/res/layout/activity_home.xml" value="0.1671195652173913" />
+        <entry key="..\:/androidProjects/app/src/main/res/layout/activity_admin_home.xml" value="0.15833333333333333" />
+        <entry key="..\:/androidProjects/app/src/main/res/layout/activity_event_registeration.xml" value="0.1" />
+        <entry key="..\:/androidProjects/app/src/main/res/layout/activity_home.xml" value="0.33" />
         <entry key="..\:/androidProjects/app/src/main/res/layout/activity_login.xml" value="0.17074275362318841" />
         <entry key="..\:/androidProjects/app/src/main/res/layout/activity_main.xml" value="0.20416666666666666" />
         <entry key="..\:/androidProjects/app/src/main/res/layout/activity_member_registeration.xml" value="0.22" />
+        <entry key="..\:/androidProjects/app/src/main/res/layout/activity_sports_registeration.xml" value="0.1125" />
+        <entry key="..\:/androidProjects/app/src/main/res/layout/activity_staff_home.xml" value="0.17239583333333333" />
+        <entry key="..\:/androidProjects/app/src/main/res/layout/activity_staff_registeration.xml" value="0.22" />
+        <entry key="..\:/androidProjects/app/src/main/res/layout/content_staff_registeration.xml" value="0.1671195652173913" />
+        <entry key="..\:/androidProjects/app/src/main/res/layout/fragment_first.xml" value="0.1671195652173913" />
+        <entry key="..\:/androidProjects/app/src/main/res/layout/fragment_second.xml" value="0.1671195652173913" />
       </map>
     </option>
   </component>

@@ -17,17 +17,15 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        member_button = findViewById(R.id.memberBtn);
-        staff_button = findViewById(R.id.staffBtn);
-
-        member_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
-                intent.putExtra(ProjectConstants.MEMBER_OR_STAFF,"member");
-                startActivity(intent);
-            }
-        });
-
+    }
+    public void memberBtn(View view) {
+        Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+        intent.putExtra(ProjectConstants.MEMBER_OR_STAFF,"member");
+        startActivity(intent);
+    }
+    public void staffBtn(View view) {
+        Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+        intent.putExtra(ProjectConstants.MEMBER_OR_STAFF,"staff");
+        startActivity(intent);
     }
 }

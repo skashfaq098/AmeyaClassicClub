@@ -12,6 +12,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:padding="16sp"
+        android:background="@drawable/background"
         tools:context=".SignUpActivity">
         <ProgressBar
             android:id="@+id/signUp_progress"

@@ -9,12 +9,12 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.ameyaclassicclub.utils.ProjectSharedPreference;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 public class HomeActivity extends AppCompatActivity {
-    private TextView txt_userEmail;
-    private Button btn_userlogout;
     FirebaseUser firebaseUser;
     FirebaseAuth mAuth;
 
@@ -23,21 +23,30 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-
-        btn_userlogout = findViewById(R.id.logutBtn);
-        //        Get Firebase auth instance
+    }
+    public void onLogoutClick(View view) {
         mAuth = FirebaseAuth.getInstance();
         firebaseUser = mAuth.getCurrentUser();
-//        handle Logout button
-        btn_userlogout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mAuth.signOut();
-                Toast.makeText(HomeActivity.this, "Logout Successful ", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(HomeActivity.this, MainActivity.class);
-                startActivity(intent);
-            }
-        });
+        ProjectSharedPreference.getInstance(HomeActivity.this).clearAllData();
+        mAuth.signOut();
+        Toast.makeText(HomeActivity.this, "Logout Successful ", Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(HomeActivity.this, MainActivity.class);
+        startActivity(intent);
+        finish();
+
+    }
+    public void onMyProfileClick(View view) {
+        finish();
+
+    }
+    public void onSportsViewClick(View view) {
+        Intent intent = new Intent(HomeActivity.this, SportListActivity.class);
+        startActivity(intent);
+
+
+    }
+    public void onEventsViewClick(View view) {
+        finish();
 
     }
 }
