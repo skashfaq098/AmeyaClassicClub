@@ -36,6 +36,7 @@ public class HomeActivity extends AppCompatActivity {
 
     }
     public void onMyProfileClick(View view) {
+        finish();
 
     }
     public void onSportsViewClick(View view) {
@@ -45,16 +46,7 @@ public class HomeActivity extends AppCompatActivity {
 
     }
     public void onEventsViewClick(View view) {
-
-    }
-    public void onViewRegisteredSports(View view) {
-        Intent intent = new Intent(HomeActivity.this, ViewRegisteredSports.class);
-        startActivity(intent);
-
-
-    }
-    public void onViewRegisteredEvents(View view) {
-
+        finish();
 
     }
 }

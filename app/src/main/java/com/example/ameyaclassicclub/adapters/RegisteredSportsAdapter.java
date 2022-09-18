@@ -28,17 +28,17 @@ import java.util.ArrayList;
 // FirebaseRecyclerAdapter is a class provided by
 // FirebaseUI. it provides functions to bind, adapt and show
 // database contents in a Recycler View
-public class SportsListAdapter extends FirebaseRecyclerAdapter<
-        SportsRegisterationModel, SportsListAdapter.sportsViewholder> {
+public class RegisteredSportsAdapter extends FirebaseRecyclerAdapter<
+        SportsRegisterationModel, RegisteredSportsAdapter.registeredSportsViewholder> {
 
-    public SportsListAdapter(
+    public RegisteredSportsAdapter(
             @NonNull FirebaseRecyclerOptions<SportsRegisterationModel> options)
     {
         super(options);
     }
     @Override
     protected void
-    onBindViewHolder(@NonNull sportsViewholder holder,
+    onBindViewHolder(@NonNull registeredSportsViewholder holder,
                      int position, @NonNull SportsRegisterationModel model)
     {
 
@@ -49,23 +49,6 @@ public class SportsListAdapter extends FirebaseRecyclerAdapter<
         holder.coachingFees.setText(model.getSportsCoachingFees());
         holder.daysInAWeek.setText(model.getSportsDaysInAweek());
         holder.timeSlot.setText(model.getSportsTimeSlot());
-        holder.registerSports.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-//                ArrayList<String> registerSportsID=new ArrayList<String>();
-//                registerSportsID.add(model.sportsId);
-                FirebaseDatabase.getInstance().getReference("UserData")
-                        .child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("registeredSports").push().setValue(model).addOnCompleteListener(new OnCompleteListener<Void>() {
-                            @Override
-                            public void onComplete(@NonNull Task<Void> task) {
-                                //    progressbar GONE
-                                Toast.makeText(v.getContext(), "Registered", Toast.LENGTH_SHORT).show();
-
-                            }
-                        });
-
-            }
-        });
 
 
         // Add lastname from model class (here
@@ -79,29 +62,28 @@ public class SportsListAdapter extends FirebaseRecyclerAdapter<
     // which the data will be shown
     @NonNull
     @Override
-    public sportsViewholder
+    public registeredSportsViewholder
     onCreateViewHolder(@NonNull ViewGroup parent,
                        int viewType)
     {
         View view
                 = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.sports_list_item, parent, false);
-        return new SportsListAdapter.sportsViewholder(view);
+                .inflate(R.layout.registered_sports_item, parent, false);
+        return new RegisteredSportsAdapter.registeredSportsViewholder(view);
     }
-    class sportsViewholder
+    class registeredSportsViewholder
             extends RecyclerView.ViewHolder {
         TextView sportsName, daysInAWeek, timeSlot,coachingFees;
         Button registerSports;
-        public sportsViewholder(@NonNull View itemView)
+        public registeredSportsViewholder(@NonNull View itemView)
         {
             super(itemView);
 
             sportsName
-                    = itemView.findViewById(R.id.ItemSportsTimeSlot);
-            daysInAWeek = itemView.findViewById(R.id.ItemSportsDaysInAWeek);
-            timeSlot = itemView.findViewById(R.id.ItemSportsName);
-            coachingFees = itemView.findViewById(R.id.ItemSportsFees);
-            registerSports = itemView.findViewById(R.id.registerSports);
+                    = itemView.findViewById(R.id.registeredItemSportsName);
+            daysInAWeek = itemView.findViewById(R.id.registeredItemSportsDaysInAWeek);
+            timeSlot = itemView.findViewById(R.id.registeredItemSportsTimeSlot);
+            coachingFees = itemView.findViewById(R.id.registeredItemSportsFees);
 
 
         }

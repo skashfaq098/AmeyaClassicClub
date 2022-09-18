@@ -17,9 +17,6 @@
         android:theme="@style/Theme.MaterialComponents.Light"
         tools:targetApi="31">
         <activity
-            android:name=".ViewRegisteredSports"
-            android:exported="false" />
-        <activity
             android:name=".AuthenticationProcessingActivity"
             android:exported="false" />
         <activity

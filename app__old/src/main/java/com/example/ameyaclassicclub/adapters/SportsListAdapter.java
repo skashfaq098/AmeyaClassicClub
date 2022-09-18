@@ -55,7 +55,7 @@ public class SportsListAdapter extends FirebaseRecyclerAdapter<
 //                ArrayList<String> registerSportsID=new ArrayList<String>();
 //                registerSportsID.add(model.sportsId);
                 FirebaseDatabase.getInstance().getReference("UserData")
-                        .child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("registeredSports").push().setValue(model).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        .child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("registeredSports").push().setValue(model.sportsId).addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
                                 //    progressbar GONE
